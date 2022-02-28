@@ -1,0 +1,19 @@
+.form__item{
+   width: 358px;
+   border: 0;
+   border-bottom: 1px solid #bcbcc4;
+   font-family: 'Inter', 'Arial';
+   font-style: normal;
+   font-weight: 400;
+   font-size: 14px;
+   line-height: 27px;
+   box-sizing: border-box;
+}
+.form__item:last-of-type{
+   margin-top: 30px;
+}
+@media (max-width: 560px){
+   .form__item{
+      width: 238px;
+   }
+}

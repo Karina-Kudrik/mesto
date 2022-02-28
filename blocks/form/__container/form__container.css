@@ -1,0 +1,19 @@
+.form__container{
+   position: fixed;
+   top: 50%;
+   left: 50%;
+   margin-top: -100px;
+   margin-left: -215px;
+   width: 430px;
+   display: flex;
+   align-items: center;
+   position: relative;
+}
+@media (max-width: 560px){
+   .form__container{
+      width: 282px;
+      top: 55%;
+      left: 64%;
+      margin-left: -190px;
+   }
+}

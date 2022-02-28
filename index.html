@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta name="author"  content="Кудрик Карина">
+   <link rel="stylesheet" href="./pages/index.css">
+   <link rel="stylesheet" href="./vendor/normalize.css">
+   <link rel="stylesheet" href="script.js">
+   <title lang="en">Mesto</title>
+</head>
+<body>
+   <div class="root">
+      <div class="page">
+         <header class="header">
+            <img class="header__logo" src="./images/logo_mesto.svg">
+         </header>
+      <main class="content">
+         <section class="profile">
+            <div class="profile__image-container">
+               <img class="profile__avatar" src="./images/avatar__image.jpg" alt="Жак-Ив Кусто">
+            </div>
+         <div class="profile__info">
+            <div class="profile__edit">
+               <h1 class="profile__name">Жак-Ив Кусто</h1>
+               <p class="profile__description">Исследователь океана</p>
+            </div>
+         </div>
+            <button class="profile__button-edit" type="button" aria-label="Редактировать профиль"></button>
+            <button class="profile__button-add" aria-label="Отправить"></button>
+         </section>
+         <section class="elements">
+         <ul class="elements__container">
+            <li class="elements__card">
+               <img class="elements__item" src="./images/photo-grid_karachaevsk1.jpg" alt="Карачаевск">
+               <figcaption class="elements__figcaption">
+                  <h3 class="elements__card-heading">Карачаевск</h3>
+                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
+               </figcaption>
+            </li>
+            <li class="elements__card">
+               <img class="elements__item" src="./images/photo-grid_elbrus2.jpg" alt="Эльбрус">
+               <figcaption class="elements__figcaption">
+                  <h3 class="elements__card-heading">Гора Эльбрус</h3>
+                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
+               </figcaption>
+            </li>
+            <li class="elements__card">
+               <img class="elements__item" src="./images/photo-grid_dombay3.jpg" alt="Домбай">
+               <figcaption class="elements__figcaption">
+                  <h3 class="elements__card-heading">Домбай</h3>
+                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
+               </figcaption>
+            </li>
+            <li class="elements__card">
+               <img class="elements__item" src="./images/photo-grid_karachaevsk1.jpg" alt="Карачаевск">
+               <figcaption class="elements__figcaption">
+                  <h3 class="elements__card-heading">Карачаево-Черкесия</h3>
+                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
+               </figcaption>
+            </li>
+            <li class="elements__card">
+               <img class="elements__item" src="./images/photo-grid_elbrus2.jpg" alt="Эльбрус">
+               <figcaption class="elements__figcaption">
+                  <h3 class="elements__card-heading">Гора Эльбрус</h3>
+                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
+               </figcaption>
+            </li>
+            <li class="elements__card">
+               <img class="elements__item" src="./images/photo-grid_dombay3.jpg" alt="Домбай">
+               <figcaption class="elements__figcaption">
+                  <h3 class="elements__card-heading">Домбай</h3>
+                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
+               </figcaption>
+            </li>
+         </ul>
+         </section>
+      </main>
+         <footer class="footer">
+            <div class="footer__container">
+               <p class="footer__copyright">&copy; 2020 Mesto Russia</p>
+            </div>
+         </footer>
+      </div>
+   </div>
+   <div class="form">
+      <div class="form__container">
+         <form class="form__admin" action="#" method="#">
+            <div class="form__main-container">
+               <h2 class="form__heading">Редактировать&nbsp;профиль</h2>
+               <fieldset class="form__input-container">
+                  <input type="text" class="form__item form__item_el_name" id="name" placeholder="Имя" value="Жак-Ив Кусто"required>
+                  <input type="text" class="form__item form__item_el_description" id="description" placeholder="О себе" value="Исследователь океана" required>
+               </fieldset>
+               <fieldset class="form__handlers">
+                  <button type="submit" class="form__button-submit" aria-label="Сохранить">Сохранить</button>
+                  <button type="reset" class="form__button-close" aria-label="Закрыть модальное окно"></button>
+               </fieldset>
+            </div>
+         </form>
+      </div>
+   </div>
+   <script defer src="./index.js"></script>
+</body>
+</html>
