@@ -7,7 +7,6 @@
    width: 430px;
    display: flex;
    align-items: center;
-   position: relative;
 }
 @media (max-width: 560px){
    .form__container{
