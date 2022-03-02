@@ -7,6 +7,9 @@
    color: #FFF;
    margin-top: 16px;
    margin-bottom: 25px;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
    } 
    @media (max-width:620px){
       .profile__description{

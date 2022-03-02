@@ -1,4 +1,5 @@
 .profile__name{
+   max-width: 290px;
    font-family: 'Inter', 'Arial';
    font-style: normal;
    font-weight: 400;
@@ -7,5 +8,8 @@
    color: #FFF;
    margin-top: 22px;
    margin-bottom: 0;
+   text-overflow: ellipsis;
+   white-space: nowrap;
+   overflow: hidden;
    }
    

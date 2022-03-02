@@ -5,15 +5,13 @@
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="author"  content="Кудрик Карина">
    <link rel="stylesheet" href="./pages/index.css">
-   <link rel="stylesheet" href="./vendor/normalize.css">
-   <link rel="stylesheet" href="script.js">
-   <title lang="en">Mesto</title>
+   <title lang="ru">Место</title>
 </head>
 <body>
    <div class="root">
       <div class="page">
          <header class="header">
-            <img class="header__logo" src="./images/logo_mesto.svg">
+            <img class="header__logo" src="./images/logo_mesto.svg" alt="Место">
          </header>
       <main class="content">
          <section class="profile">
@@ -21,13 +19,13 @@
                <img class="profile__avatar" src="./images/avatar__image.jpg" alt="Жак-Ив Кусто">
             </div>
          <div class="profile__info">
-            <div class="profile__edit">
+            <div class="profile__info-edit">
                <h1 class="profile__name">Жак-Ив Кусто</h1>
-               <p class="profile__description">Исследователь океана</p>
+               <button class="profile__button profile__button_edit" type="button" aria-label="Редактировать профиль"></button>
             </div>
+               <p class="profile__description">Исследователь океана</p>
          </div>
-            <button class="profile__button-edit" type="button" aria-label="Редактировать профиль"></button>
-            <button class="profile__button-add" aria-label="Отправить"></button>
+            <button class="profile__button profile__button_add" aria-label="Отправить"></button>
          </section>
          <section class="elements">
          <ul class="elements__container">
@@ -88,18 +86,18 @@
          <form class="form__admin" action="#" method="#">
             <div class="form__main-container">
                <h2 class="form__heading">Редактировать&nbsp;профиль</h2>
-               <fieldset class="form__input-container">
-                  <input type="text" class="form__item form__item_el_name" id="name" placeholder="Имя" value="Жак-Ив Кусто"required>
+               <div class="form__input-container">
+                  <input type="text" class="form__item form__item_el_name" id="name" placeholder="Имя" value="Жак-Ив Кусто" required>
                   <input type="text" class="form__item form__item_el_description" id="description" placeholder="О себе" value="Исследователь океана" required>
-               </fieldset>
-               <fieldset class="form__handlers">
-                  <button type="submit" class="form__button-submit" aria-label="Сохранить">Сохранить</button>
-                  <button type="reset" class="form__button-close" aria-label="Закрыть модальное окно"></button>
-               </fieldset>
+               </div>
+               <div class="form__handlers">
+                  <button type="submit" class="form__button form__button_submit" aria-label="Сохранить">Сохранить</button>
+                  <button type="reset" class="form__button form__button_close" aria-label="Закрыть модальное окно"></button>
+               </div>
             </div>
          </form>
       </div>
    </div>
-   <script defer src="./index.js"></script>
+   <script defer src="./scripts/index.js"></script>
 </body>
 </html>
