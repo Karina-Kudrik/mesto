@@ -10,30 +10,3 @@
    visibility: hidden;
    opacity: 0;
 }
-.popup__wrapper{
-   flex-direction: column;
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   display: flex;
-}
-
-.popup__image{
-   max-width: 75vw;
-   max-height: 75vh;
-   height: 100%;
-   width: 100%;
-   object-fit: cover;
-   object-position: center;
-}
-.popup__caption{
-   font-family: 'Inter','Arial';
-   font-style: normal;
-   font-weight: 400;
-   font-size: 12px;
-   line-height: 15px;
-   color:white;
-   margin-top: 10px;
-   margin-bottom: 0;
-}
