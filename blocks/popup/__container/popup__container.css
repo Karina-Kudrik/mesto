@@ -1,4 +1,4 @@
-.form__container{
+.popup__container{
    position: fixed;
    top: 50%;
    left: 50%;
@@ -9,7 +9,7 @@
    align-items: center;
 }
 @media (max-width: 560px){
-   .form__container{
+   .popup__container{
       width: 282px;
       top: 55%;
       left: 64%;

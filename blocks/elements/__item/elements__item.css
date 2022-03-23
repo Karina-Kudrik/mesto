@@ -1,4 +1,9 @@
 .elements__item{
    width: 282px;
    height: 282px;
+   object-fit: cover;
+   object-position: center;
+}
+.elements__item:hover{
+cursor: pointer;
 }

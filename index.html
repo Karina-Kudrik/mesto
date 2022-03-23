@@ -20,57 +20,16 @@
             </div>
          <div class="profile__info">
             <div class="profile__info-edit">
-               <h1 class="profile__name">Жак-Ив Кусто</h1>
+               <h1 class="profile__name"></h1>
                <button class="profile__button profile__button_edit" type="button" aria-label="Редактировать профиль"></button>
             </div>
-               <p class="profile__description">Исследователь океана</p>
+               <p class="profile__description"></p>
          </div>
-            <button class="profile__button profile__button_add" aria-label="Отправить"></button>
+            <button class="profile__button profile__button_add" type="button" aria-label="Добавить"></button>
          </section>
          <section class="elements">
          <ul class="elements__container">
-            <li class="elements__card">
-               <img class="elements__item" src="./images/photo-grid_karachaevsk1.jpg" alt="Карачаевск">
-               <div class="elements__figcaption">
-                  <h3 class="elements__card-heading">Карачаевск</h3>
-                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
-               </div>
-            </li>
-            <li class="elements__card">
-               <img class="elements__item" src="./images/photo-grid_elbrus2.jpg" alt="Эльбрус">
-               <div class="elements__figcaption">
-                  <h3 class="elements__card-heading">Гора Эльбрус</h3>
-                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
-               </div>
-            </li>
-            <li class="elements__card">
-               <img class="elements__item" src="./images/photo-grid_dombay3.jpg" alt="Домбай">
-               <div class="elements__figcaption">
-                  <h3 class="elements__card-heading">Домбай</h3>
-                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
-               </div>
-            </li>
-            <li class="elements__card">
-               <img class="elements__item" src="./images/photo-grid_karachaevsk1.jpg" alt="Карачаевск">
-               <div class="elements__figcaption">
-                  <h3 class="elements__card-heading">Карачаево-Черкесия</h3>
-                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
-               </div>
-            </li>
-            <li class="elements__card">
-               <img class="elements__item" src="./images/photo-grid_elbrus2.jpg" alt="Эльбрус">
-               <div class="elements__figcaption">
-                  <h3 class="elements__card-heading">Гора Эльбрус</h3>
-                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
-               </div>
-            </li>
-            <li class="elements__card">
-               <img class="elements__item" src="./images/photo-grid_dombay3.jpg" alt="Домбай">
-               <div class="elements__figcaption">
-                  <h3 class="elements__card-heading">Домбай</h3>
-                  <button class="elements__like" type="button" aria-label="Мне нравится"></button>
-               </div>
-            </li>
+            
          </ul>
          </section>
       </main>
@@ -81,17 +40,45 @@
          </footer>
       </div>
    </div>
-   <div class="form">
-      <div class="form__container">
-         <form class="form__admin">
-            <h2 class="form__heading">Редактировать&nbsp;профиль</h2>
-               <input type="text" class="form__item form__item_el_name" id="name" placeholder="Имя" value="Жак-Ив Кусто" required>
-               <input type="text" class="form__item form__item_el_description" id="description" placeholder="О себе" value="Исследователь океана" required>
-               <button type="submit" class="form__button form__button_submit" aria-label="Сохранить">Сохранить</button>
-            <button type="reset" class="form__button form__button_close" aria-label="Закрыть модальное окно"></button>
+   <div class="popup popup_edit">
+      <div class="popup__container">
+         <form class="popup__form-admin">
+            <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
+               <input type="text" class="popup__form-item popup__form-item_el_name" placeholder="Имя" value="Жак-Ив Кусто" required>
+               <input type="text" class="popup__form-item popup__form-item_el_description" placeholder="О себе" value="Исследователь океана" required>
+               <button type="submit" class="popup__form-button popup__form-button_submit" aria-label="Сохранить">Сохранить</button>
+            <button type="reset" class="popup__form-button popup__form-button_close" aria-label="Закрыть модальное окно"></button>
          </form>
       </div>
    </div>
+   <div class="popup popup_add">
+      <div class="popup__container">
+         <form class="popup__form-admin popup__form-admin_add">
+            <h2 class="popup__heading">Новое&nbsp;место</h2>
+               <input type="text" class="popup__form-item popup__form-item_el_place" value="dhfdf"  placeholder="Название" required>
+               <input type="text" class="popup__form-item popup__form-item_el_link" value="https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg" placeholder="Ссылка на картинку" required>
+               <button type="submit" class="popup__form-button popup__form-button_submit popup__form-button_add" aria-label="Сохранить">Сохранить</button>
+            <button type="reset" class="popup__form-button popup__form-button_close popup__form-button_reset" aria-label="Закрыть модальное окно"></button>
+         </form>
+      </div>
+   </div>
+   <div class="popup popup_img">
+      <div class="popup__wrapper">
+         <img class="popup__image" src="#">
+         <h2 class="popup__caption"></h2>
+         <button type="reset" class="popup__form-button popup__form-button_close popup__form-button_esc"></button>
+      </div>
+   </div>
+   <template id="card-template">
+      <li class="elements__card">
+         <img class="elements__item">
+         <div class="elements__figcaption">
+            <h3 class="elements__card-heading"></h3>
+            <button class="elements__like"></button>
+            <button class="elements__delete"></button>
+         </div>
+      </li>
+   </template>
    <script defer src="./scripts/index.js"></script>
 </body>
 </html>
