@@ -1,4 +1,4 @@
-.popup__form-item{
+.popup__input{
    width: 358px;
    border: 0;
    border-bottom: 1px solid #bcbcc4;
@@ -9,14 +9,14 @@
    line-height: 27px;
    box-sizing: border-box;
 }
-.popup__form-item:last-of-type{
+.popup__input:last-of-type{
    margin-top: 25px;
 }
 @media (max-width: 560px){
-   .popup__form-item{
+   .popup__input{
       width: 238px;
    }
 }
-.popup__form-item_el_name{
+.popup__input_type_name{
    margin-top: -5px;
 }
