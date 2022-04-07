@@ -7,7 +7,7 @@
    <link rel="stylesheet" href="./pages/index.css">
    <title lang="ru">Место</title>
 </head>
-<body>
+<body class="body">
    <div class="root">
       <div class="page">
          <header class="header">
@@ -61,8 +61,8 @@
                <span class="popup__error" id="name-error"></span>
                <input type="url" class="popup__input popup__input_type_link" id="link" name="link" placeholder="Ссылка на картинку" required>
                <span class="popup__error" id="link-error"></span>
-               <button type="submit" class="popup__button popup__button_type_submit popup__button_type_add" aria-label="Сохранить">Создать</button>
-            <button type="reset" class="popup__button popup__button_type_close popup__button_type_reset" aria-label="Закрыть модальное окно"></button>
+               <button type="submit" class="popup__button popup__button_type_submit popup__button_type_save" aria-label="Сохранить">Создать</button>
+            <button type="reset" class="popup__button popup__button_type_close " aria-label="Закрыть модальное окно"></button>
          </form>
       </div>
    </div>
@@ -70,7 +70,7 @@
       <div class="popup__wrapper">
          <img class="popup__image">
          <h2 class="popup__caption"></h2>
-         <button type="reset" class="popup__button popup__button_type_close popup__button_type_esc"></button>
+         <button type="reset" class="popup__button popup__button_type_close" aria-label="Закрыть модальное окно"></button>
       </div>
    </div>
    <template id="card-template">

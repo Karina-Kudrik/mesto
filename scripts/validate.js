@@ -1,8 +1,8 @@
 const validationObject = {
    formSelector: '.popup__form-admin',
    inputSelector: '.popup__input',
-   inactiveButtonClass: 'popup__button_type_disabled',
    submitButtonSelector: '.popup__button_type_submit',
+   inactiveButtonClass: 'popup__button_type_disabled',
    inputErrorClass: '.popup__input_type_error',
    errorClass: 'popup__error_active'
 }
@@ -50,7 +50,7 @@ const setEventListeners = (formElement, {inputSelector, submitButtonSelector, in
 
 
 function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
-   if (hasInvalidInput(inputList)) {
+   if (hasInvalidInput(inputList, inactiveButtonClass)) {
       buttonElement.classList.add(inactiveButtonClass);
       buttonElement.setAttribute('disabled', true);
    } else {
@@ -58,6 +58,7 @@ function toggleButtonState(inputList, buttonElement, inactiveButtonClass) {
       buttonElement.removeAttribute('disabled');
    }
 }
+
 
 const enableValidation = ({formSelector, ...rest}) => {
    const formList = Array.from(document.querySelectorAll(formSelector));
