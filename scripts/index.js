@@ -1,3 +1,36 @@
+import { Card } from "./Card.js";
+import { FormValidator } from "./FormValidator.js";
+
+const validationObject = {
+   formSelector: '.popup__form-admin',
+   inputSelector: '.popup__input',
+   submitButtonSelector: '.popup__button_type_submit',
+   inactiveButtonClass: 'popup__button_type_disabled',
+   inputErrorClass: '.popup__input_type_error',
+   errorClass: 'popup__error_active'
+}
+
+const cards = [
+   {  name: 'Архыз',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg'
+   },
+   {  name: 'Челябинская область',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg'
+   },
+   {  name: 'Иваново',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg'
+   },
+   {  name: 'Камчатка',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg'
+   },
+   {   name: 'Холмогорский район',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg'
+   },
+   {   name: 'Байкал',
+      link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg'
+   }
+   ];
+
 const popupEdit = document.querySelector('.popup_type_profile-edit');
 const popupAdd = document.querySelector('.popup_type_card-add');
 const popupImg = document.querySelector('.popup_type_card-preview');
@@ -48,7 +81,7 @@ const clickCloseIcon = (evt) => {
    closePopup(evt.target.closest(".popup"));
 };
 
-const iconClose = Array.from(document.querySelectorAll(".popup__button_type_close")).forEach((element) => {
+Array.from(document.querySelectorAll(".popup__button_type_close")).forEach((element) => {
    element.addEventListener("click", clickCloseIcon);
 });
 
@@ -64,53 +97,27 @@ function handleProfileFormSubmit(evt) {
 }
 profileEditForm.addEventListener('submit', handleProfileFormSubmit);
 
-function createCard(element) { 
-   const cardTemplate = document.querySelector('#card-template').content;
-   const cardElement =  cardTemplate.cloneNode(true);
-   const cardImage = cardElement.querySelector('.elements__item');  
-   const cardLikeBtn = cardElement.querySelector('.elements__like');
-   const cardBtnDelete = cardElement.querySelector('.elements__delete');
-
-   cardElement.querySelector('.elements__card-heading').textContent = element.name;
-   cardImage.src = element.link;
-   cardImage.alt = element.name;
-
-   cardLikeBtn.addEventListener('click', likeCard);
-   cardBtnDelete.addEventListener('click', deleteCard);
-   cardImage.addEventListener('click', previewCardImg);
-      
-   return cardElement;
-}
-
-function likeCard(evt) {
-   evt.target.classList.toggle('elements__like_active');
-}
-
-function deleteCard(evt) {
-   cardList.removeChild(evt.target.closest('.elements__card'));
-}
-
-function previewCardImg(evt) {
-   popupCardCaption.textContent = evt.target.alt;
-   popupCardImg.src = evt.target.src;
-   popupCardImg.alt = evt.target.alt;
+function previewCardImg() {
+   popupCardCaption.textContent = this._name;
+   popupCardImg.src = this._link;
+   popupCardImg.alt = this._name;
    openPopup(popupImg);
 }
 
-cards.forEach(function(element) {
-   cardList.append(createCard(element));
-})
+cards.forEach((item) => {
+   const card = new Card (item, '.card-template', previewCardImg);
+   const cardElement = card.generateCard();
+   cardList.append(cardElement);
+});
 
 function addCard(evt) {
    evt.preventDefault();
 
-   const newCard = {};
-   newCard.name = cardFormNameInput.value;
-   newCard.link = cardFormLinkInput.value;
-   cardList.prepend(createCard(newCard));
+   const newCard = new Card ({name:cardFormNameInput.value, link:cardFormLinkInput.value},'.card-template', previewCardImg);
+   const newCardElement = newCard.generateCard();
+   cardList.prepend(newCardElement);
 
-   cardFormNameInput.value = '';
-   cardFormLinkInput.value = '';
+   cardForm.reset();
    
    closePopup(popupAdd);
 
@@ -118,3 +125,9 @@ function addCard(evt) {
    cardFormSubmitBtn.setAttribute('disabled', true);
 }
 cardForm.addEventListener('submit', addCard);
+
+const profileValidator = new FormValidator(validationObject, profileEditForm);
+profileValidator.enableValidation();
+
+const createCardValidator = new FormValidator(validationObject, cardForm);
+createCardValidator.enableValidation();
