@@ -1,3 +1,4 @@
+import './index.css';
 import Section from '../components/Section.js';
 import Card from '../components/Card.js';
 import FormValidator  from '../components/FormValidator.js';
@@ -19,7 +20,7 @@ import { cards,
    profileNameInput, 
    profileDescriptionInput, 
    cardFormNameInput, 
-   cardFormLinkInput } from "../utils/constants.js";
+   cardFormLinkInput } from '../utils/constants.js';
 
 const popupImgPreview = new PopupWithImage(popupImg);
 const userProfile = new UserInfo({profileNameSelector: profileName, profileDescriptionSelector: profileDescription});

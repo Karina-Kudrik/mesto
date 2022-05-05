@@ -4,19 +4,18 @@
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <meta name="author"  content="Кудрик Карина">
-   <link rel="stylesheet" href="./pages/index.css">
    <title lang="ru">Место</title>
 </head>
 <body class="body">
    <div class="root">
       <div class="page">
          <header class="header">
-            <img class="header__logo" src="./images/logo_mesto.svg" alt="Место">
+            <img class="header__logo" src="<%=require('./images/logo_mesto.svg')%>" alt="Место">
          </header>
       <main class="content">
          <section class="profile">
             <div class="profile__image-container">
-               <img class="profile__avatar" src="./images/avatar__image.jpg" alt="Жак-Ив Кусто">
+               <img class="profile__avatar" src="<%=require('./images/avatar__image.jpg')%>" alt="Жак-Ив Кусто">
             </div>
          <div class="profile__info">
             <div class="profile__info-edit">
@@ -83,6 +82,5 @@
          </div>
       </li>
    </template>
-   <script type = "module" src="./pages/index.js"></script>
 </body>
 </html>
