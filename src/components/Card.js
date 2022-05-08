@@ -7,12 +7,11 @@ export default class Card {
    }
 
    _getTemplate() {
-   const cardElement = document
+   return document
       .querySelector(this._cardSelector)
       .content
       .querySelector('.elements__card')
-      .cloneNode(true)
-      return cardElement;
+      .cloneNode(true);
    }
 
    _handleLikeCard() {
@@ -20,6 +19,7 @@ export default class Card {
    }
    _handleCardRemove() {
       this._element.remove();
+      this._element = null;
    }
 
    _setEventListeners() {
