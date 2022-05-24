@@ -6,6 +6,7 @@
    line-height: calc((100vw - 320px)/(1280 - 320)*(21.78 - 16.94) + 16.94px);
    color: #FFF;
    margin-top: 16px;
+   margin-left: 30px;
    margin-bottom: 25px;
    text-overflow: ellipsis;
    white-space: nowrap;

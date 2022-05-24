@@ -27,7 +27,7 @@
             <button class="profile__button profile__button_type_add" type="button" aria-label="Добавить"></button>
          </section>
          <section class="elements">
-         <ul class="elements__container">
+         <ul class="elements__container" id="container" name="container">
             
          </ul>
          </section>
@@ -45,8 +45,8 @@
             <h2 class="popup__heading">Редактировать&nbsp;профиль</h2>
                <input type="text" name="name" id="name" class="popup__input popup__input_type_name" minlength="2" maxlength="40" placeholder="Имя" value="Жак-Ив Кусто" required>
                <span class="popup__error" id="name-error"></span>
-               <input type="text" name="description" id="description" class="popup__input popup__input_type_description" minlength="2" maxlength="200" placeholder="О себе" value="Исследователь океана" required>
-               <span class="popup__error" id="description-error"></span>
+               <input type="text" name="about" id="about" class="popup__input popup__input_type_about" minlength="2" maxlength="200" placeholder="О себе" value="Исследователь океана" required>
+               <span class="popup__error" id="about-error"></span>
                <button type="submit" class="popup__button popup__button_type_submit" aria-label="Сохранить">Сохранить</button>
             <button type="reset" class="popup__button popup__button_type_close" aria-label="Закрыть модальное окно"></button>
          </form>
@@ -56,9 +56,9 @@
       <div class="popup__container">
          <form class="popup__form-admin popup__form-admin_type_add" name="card" novalidate>
             <h2 class="popup__heading">Новое&nbsp;место</h2>
-               <input type="text" id="place" name="place" class="popup__input popup__input_type_place" minlength="1" maxlength="30" placeholder="Название" required>
+               <input type="text" id="place" name="cardtitle" class="popup__input popup__input_type_place" minlength="1" maxlength="30" placeholder="Название" required>
                <span class="popup__error" id="place-error"></span>
-               <input type="url" id="link" name="link" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required>
+               <input type="url" id="link" name="cardlink" class="popup__input popup__input_type_link" placeholder="Ссылка на картинку" required>
                <span class="popup__error" id="link-error"></span>
                <button type="submit" class="popup__button popup__button_type_submit popup__button_type_save" aria-label="Сохранить">Создать</button>
             <button type="reset" class="popup__button popup__button_type_close " aria-label="Закрыть модальное окно"></button>
@@ -72,12 +72,36 @@
          <button type="reset" class="popup__button popup__button_type_close" aria-label="Закрыть модальное окно"></button>
       </div>
    </div>
+   <div class="popup popup_type_confirm">
+      <div class="popup__container">
+         <form class="popup__form-admin popup__form-admin_type_confirm" name="confirm" novalidate>
+            <h2 class="popup__heading">Вы&nbsp;уверены?</h2>
+               <button type="submit" class="popup__button popup__button_type_submit" aria-label="Да">Да</button>
+            <button type="reset" class="popup__button popup__button_type_close " aria-label="Закрыть модальное окно"></button>
+         </form>
+      </div>
+   </div>
+   <div class="popup popup_type_avatar-edit">
+      <div class="popup__container">
+         <form class="popup__form-admin popup__form-admin_type_avatar_edit" name="avatar" novalidate>
+            <h2 class="popup__heading">Обновить&nbsp;аватар</h2>
+               <input type="url" id="avatar" name="avatarlink" class="popup__input popup__input_type_url" placeholder="Ссылка на изображение" required>
+               <span class="popup__error" id="avatar-error"></span>
+               <button type="submit" class="popup__button popup__button_type_submit popup__button_type_edit_avatar" aria-label="Сохранить">Создать</button>
+            <button type="reset" class="popup__button popup__button_type_close " aria-label="Закрыть модальное окно"></button>
+         </form>
+      </div>
+   </div>
+
    <template class="card-template" id="card-template">
       <li class="elements__card">
          <img class="elements__item">
          <div class="elements__figcaption">
             <h3 class="elements__card-heading"></h3>
-            <button class="elements__like"></button>
+            <div class="elements__counter">
+               <button class="elements__like"></button>
+               <p class="elements__like-counter"></p>
+            </div>
             <button class="elements__delete"></button>
          </div>
       </li>

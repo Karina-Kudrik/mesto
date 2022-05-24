@@ -1,19 +1,27 @@
 export default class Card {
-   constructor(data, cardSelector, handleCardClick) {
-      this._name = data.name;
-      this._link = data.link;
-      this._cardSelector = cardSelector;
-      this._handleCardClick = handleCardClick;
+   constructor({ id, name, link, likes, ownerId, userId},
+   cardSelector,
+   handleCardClick, 
+   handleDeleteClick, 
+   handleLikeClick) {
+   this._id = id;
+   this._name = name;
+   this._link = link;
+   this._likes = likes;
+   this._ownerId = ownerId;
+   this._userId = userId;
+   this._cardSelector = cardSelector;
+   this._handleCardClick = handleCardClick;
+   this._handleDeleteClick = handleDeleteClick;
+   this._handleLikeClick = handleLikeClick
    }
-
    _getTemplate() {
-   return document
-      .querySelector(this._cardSelector)
-      .content
-      .querySelector('.elements__card')
-      .cloneNode(true);
+      return document
+         .querySelector(this._cardSelector)
+         .content
+         .querySelector('.elements__card')
+         .cloneNode(true);
    }
-
    _handleLikeCard() {
       this._cardLikeBtn.classList.toggle('elements__like_active');
    }
