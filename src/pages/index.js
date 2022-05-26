@@ -32,13 +32,6 @@ const userProfile = new UserInfo({
    aboutSelector: '.profile__description', 
    avatarSelector: '.profile__avatar'});
 
-const cardSection = new Section({
-   renderer: (data) => {
-      const card = createCard(data);
-      cardSection.addItem(card);
-   },
-}, '.elements__container');
-
 api
 .getAllData()
 .then(([cards, user]) => {
@@ -51,45 +44,66 @@ api
    });
 }).catch((err) => console.log(err));
 
-const popupWithSubmit = new PopupWithSubmit('.popup_type_confirm',  {
+const popupWithSubmit = new PopupWithSubmit('.popup_type_confirm', {
    handleFormSubmit: (cardId, card) => {
       api
       .deleteCard(cardId, card)
-      .then(() => {
-         card.removeCard();
+         .then((res) => {
+         card.handleCardRemove(res);
          popupWithSubmit.close();
       }).catch((err) => console.log(err));
    }
 });
 
-function createCard(card) {
+function createCard(data) {
+   //console.log(data);
    const newCard = new Card({
-      id: card._id,
-      name: card.name,
-      link: card.link,
-      likes: card.likes,
-      ownerId: card.owner._id,
-      userId: userProfile._id
-   }, '.card-template',
+      id: data._id,
+      name: data.name,
+      link: data.link,
+      likes: data.likes,
+      ownerId: data.owner,
+   },
+      '.card-template',
       handleCardClick, 
       handleDeleteClick, 
-      //handleLikeClick
+      handleLikeClick
       );
+      
    return newCard.generateCard();
 }
+
+const cardSection = new Section({
+   renderer: (data) => {
+      const card = createCard(data);
+      cardSection.addItem(card);
+   },
+}, '.elements__container');
 
 function handleCardClick(name, link) {
    popupImgPreview.open(name, link);
 }
 
-function handleDeleteClick(cardId, card) {
-   popupWithSubmit.open(cardId, card);
+function handleDeleteClick(card, cardId) {
+   popupWithSubmit.open(card, cardId);
 }
 
-/*function handleLikeClick() {
-   
+function handleLikeClick(card) {
+   if (card.hasUserLike) {
+      api
+      .deleteLike(card._id)
+      .then((res) => {
+         card.deleteUserLike(res.likes.length);
+      }).catch((err) => console.log(err));
+   } else {
+      api
+      .setLike(card._id)
+      .then((res) => {
+         card.addUserLike(res.likes.length);
+      }).catch((err) => console.log(err));
+   }
 }
-*/
+
 const popupEditForm = new PopupWithForm('.popup_type_profile-edit', {
    handleFormSubmit: (data) => {
       api
@@ -114,7 +128,7 @@ const popupEditForm = new PopupWithForm('.popup_type_profile-edit', {
 const popupAvatarEdit = new PopupWithForm('.popup_type_avatar-edit', {
    handleFormSubmit: (data) => {
       api
-      .setUserAvatar({avatar: data.avatar})
+      .setUserAvatar(data)
       .then((res) => {
          userProfile.setUserInfo(res);
          popupAvatarEdit.close();
@@ -126,13 +140,9 @@ const popupAvatarEdit = new PopupWithForm('.popup_type_avatar-edit', {
 const popupAddForm = new PopupWithForm('.popup_type_card-add', {
    handleFormSubmit: (data) => {
       api
-      .addCard({
-         name: data.name,
-         link: data.link
-      })
-      .then((item) => {
-         const newCard = createCard(item);
-         cardSection.renderItems(newCard);
+      .addCard(data)
+      .then((res) => {
+         cardSection.addItem(createCard(res));
          popupAddForm.close();
       })
       .catch((err) => console.log(err))
@@ -161,7 +171,6 @@ avatarEditBtn.addEventListener('click', () => {
    avatarValidator.resetValidation();
 })
 
-const popupImgPreview = new PopupWithImage('.popup_type_card-preview');
 
 popupAddForm.setEventListeners();
 popupEditForm.setEventListeners();
@@ -172,6 +181,7 @@ popupWithSubmit.setEventListeners();
 const profileValidator = new FormValidator(validationObject, profileEditForm); 
 const createCardValidator = new FormValidator(validationObject, cardAddForm);
 const avatarValidator = new FormValidator(validationObject, avatarEditForm); 
+const popupImgPreview = new PopupWithImage('.popup_type_card-preview');
 
 profileValidator.enableValidation();  
 createCardValidator.enableValidation();
