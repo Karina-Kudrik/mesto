@@ -45,9 +45,8 @@ export default class Api {
       }).then(this._handleError); 
    }
    
-   deleteCard(cardId) {
-      console.log(data);
-      return fetch(this._url + `cards/${cardId}`, {
+   deleteCard(id) {
+      return fetch(this._url + `cards/${id}`, {
          method:'DELETE',
          headers: this._headers,
       }).then(this._handleError); 
@@ -61,26 +60,27 @@ export default class Api {
       }).then(this._handleError); 
    }
    
-   setLike(cardId) {
-      return fetch(this._url + `cards/${cardId}/likes`, {
+   setLike(id) {
+      return fetch(this._url + `cards/${id}/likes`, {
          method:'PUT',
          headers: this._headers
       }).then(this._handleError);
    }
 
-   deleteLike(cardId) {
-      return fetch(this._url + `cards/${cardId}/likes`, {
+   deleteLike(id) {
+      return fetch(this._url + `cards/${id}/likes`, {
          method:'DELETE',
          headers: this._headers
       }).then(this._handleError);
    }
 
    setUserAvatar(data) {
-      //console.log(data);
+      console.log(data);
+      //console.log(avatar);
       return fetch(this._url + 'users/me/avatar', {
-         method:'PATCH',
+         method: 'PATCH',
          headers: this._headers,
-         body:JSON.stringify(data),
+         body: JSON.stringify({avatar: data.avatar}),
       }).then(this._handleError); 
    }
 }

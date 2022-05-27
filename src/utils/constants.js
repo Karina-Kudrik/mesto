@@ -18,3 +18,4 @@ export const profileNameInput = document.querySelector('.popup__input_type_name'
 export const profileDescriptionInput = document.querySelector('.popup__input_type_about');
 export const avatarEditForm = document.querySelector('.popup__form-admin_type_avatar_edit');
 export const avatarEditBtn = document.querySelector('.profile__avatar');
+export const myId = 'c12d0cf84adf777a4ee414a7';

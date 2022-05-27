@@ -30,7 +30,8 @@ const api = new Api ({
 const userProfile = new UserInfo({
    nameSelector: '.profile__name', 
    aboutSelector: '.profile__description', 
-   avatarSelector: '.profile__avatar'});
+   avatarSelector: '.profile__avatar'
+});
 
 api
 .getAllData()
@@ -45,24 +46,23 @@ api
 }).catch((err) => console.log(err));
 
 const popupWithSubmit = new PopupWithSubmit('.popup_type_confirm', {
-   handleFormSubmit: (cardId, card) => {
+   handleFormSubmit: (card) => {
       api
-      .deleteCard(cardId, card)
-         .then((res) => {
+      .deleteCard(card._id)
+      .then((res) => {
          card.handleCardRemove(res);
          popupWithSubmit.close();
       }).catch((err) => console.log(err));
    }
 });
 
-function createCard(data) {
-   //console.log(data);
+function createCard(card) {
    const newCard = new Card({
-      id: data._id,
-      name: data.name,
-      link: data.link,
-      likes: data.likes,
-      ownerId: data.owner,
+      id: card._id,
+      name: card.name,
+      link: card.link,
+      likes: card.likes,
+      owner: card.owner,
    },
       '.card-template',
       handleCardClick, 
@@ -80,16 +80,17 @@ const cardSection = new Section({
    },
 }, '.elements__container');
 
+
 function handleCardClick(name, link) {
    popupImgPreview.open(name, link);
 }
 
-function handleDeleteClick(card, cardId) {
-   popupWithSubmit.open(card, cardId);
+function handleDeleteClick(card) {
+   popupWithSubmit.open(card);
 }
 
 function handleLikeClick(card) {
-   if (card.hasUserLike) {
+   if (card.isLiked) {
       api
       .deleteLike(card._id)
       .then((res) => {
@@ -105,40 +106,43 @@ function handleLikeClick(card) {
 }
 
 const popupEditForm = new PopupWithForm('.popup_type_profile-edit', {
-   handleFormSubmit: (data) => {
+   handleFormSubmit: ({name, about}) => {
+      popupEditForm.renderLoading(true),
       api
       .setUserInfo({
-         id: data._id,
-         name: data.name,
-         about: data.about,
-      })
-      .then((data) => {
+         name,
+         about
+   })
+      .then(({name, about, avatar}) => {
          userProfile.setUserInfo({
-            id: data._id,
-            name: data.name,
-            about: data.about,
-            avatar: data.avatar,
+            name: name,
+            about: about,
+            avatar: avatar,
          });
          popupEditForm.close();
       })
-      .catch((err) => console.log(err)) 
+      .catch((err) => console.log(err))
+      .finally(() => popupEditForm.renderLoading(false));
    },
 })
 
 const popupAvatarEdit = new PopupWithForm('.popup_type_avatar-edit', {
-   handleFormSubmit: (data) => {
+   handleFormSubmit: (item) => {
+      popupAvatarEdit.renderLoading(true),
       api
-      .setUserAvatar(data)
+      .setUserAvatar(item)
       .then((res) => {
-         userProfile.setUserInfo(res);
+         userProfile.setUserAvatar(res.avatar);
          popupAvatarEdit.close();
       }) 
       .catch((err) => console.log(err))
+      .finally(() => popupAvatarEdit.renderLoading(false));
    },
 });
 
 const popupAddForm = new PopupWithForm('.popup_type_card-add', {
    handleFormSubmit: (data) => {
+      popupAddForm.renderLoading(true);
       api
       .addCard(data)
       .then((res) => {
@@ -146,6 +150,7 @@ const popupAddForm = new PopupWithForm('.popup_type_card-add', {
          popupAddForm.close();
       })
       .catch((err) => console.log(err))
+      .finally(() => popupAddForm.renderLoading(false));
    },
 })
 
@@ -171,7 +176,7 @@ avatarEditBtn.addEventListener('click', () => {
    avatarValidator.resetValidation();
 })
 
-
+const popupImgPreview = new PopupWithImage('.popup_type_card-preview');
 popupAddForm.setEventListeners();
 popupEditForm.setEventListeners();
 popupImgPreview.setEventListeners();
@@ -181,7 +186,6 @@ popupWithSubmit.setEventListeners();
 const profileValidator = new FormValidator(validationObject, profileEditForm); 
 const createCardValidator = new FormValidator(validationObject, cardAddForm);
 const avatarValidator = new FormValidator(validationObject, avatarEditForm); 
-const popupImgPreview = new PopupWithImage('.popup_type_card-preview');
 
 profileValidator.enableValidation();  
 createCardValidator.enableValidation();
