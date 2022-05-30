@@ -18,6 +18,10 @@
    background-color: rgba(0,0,0,.8);
    cursor: pointer;
 }
+.popup__button_type_submit:disabled{
+   cursor: default;
+   background-color: rgba(0,0,0,.1);
+}
 @media (max-width: 560px){
    .popup__button_type_submit{
       width: 238px;

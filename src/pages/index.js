@@ -19,6 +19,13 @@ import {
    profileNameInput, 
    } from '../utils/constants.js';
 
+let userId = null;
+
+const popupImgPreview = new PopupWithImage('.popup_type_card-preview');
+const profileValidator = new FormValidator(validationObject, profileEditForm); 
+const createCardValidator = new FormValidator(validationObject, cardAddForm);
+const avatarValidator = new FormValidator(validationObject, avatarEditForm); 
+
 const api = new Api ({
    url: 'https://mesto.nomoreparties.co/v1/cohort-41/',
    headers: {
@@ -41,8 +48,9 @@ api
       id: user._id,
       name: user.name,
       about: user.about,
-      avatar: user.avatar
+      avatar: user.avatar,
    });
+   userId = user._id;
 }).catch((err) => console.log(err));
 
 const popupWithSubmit = new PopupWithSubmit('.popup_type_confirm', {
@@ -63,23 +71,31 @@ function createCard(card) {
       link: card.link,
       likes: card.likes,
       owner: card.owner,
+      userId: userProfile._id
    },
       '.card-template',
       handleCardClick, 
       handleDeleteClick, 
       handleLikeClick
-      );
+   );
       
    return newCard.generateCard();
 }
 
 const cardSection = new Section({
    renderer: (data) => {
-      const card = createCard(data);
-      cardSection.addItem(card);
+      const rendererFn2 = () => {
+         const card = createCard(data);
+         cardSection.addItem(card);
+      };
+      let timer = setInterval(() => {
+         if (userProfile._id !== undefined) {
+            clearInterval(timer);
+            rendererFn2();
+         }
+      }, 0);
    },
 }, '.elements__container');
-
 
 function handleCardClick(name, link) {
    popupImgPreview.open(name, link);
@@ -89,18 +105,16 @@ function handleDeleteClick(card) {
    popupWithSubmit.open(card);
 }
 
-function handleLikeClick(card) {
-   if (card.isLiked) {
-      api
-      .deleteLike(card._id)
+function handleLikeClick(id, toggleLike, isLiked) {
+   if (isLiked) {
+   api.deleteLike(id)
       .then((res) => {
-         card.deleteUserLike(res.likes.length);
+         toggleLike(res.likes.length);
       }).catch((err) => console.log(err));
    } else {
-      api
-      .setLike(card._id)
+   api.setLike(id)
       .then((res) => {
-         card.addUserLike(res.likes.length);
+         toggleLike(res.likes.length);
       }).catch((err) => console.log(err));
    }
 }
@@ -113,11 +127,12 @@ const popupEditForm = new PopupWithForm('.popup_type_profile-edit', {
          name,
          about
    })
-      .then(({name, about, avatar}) => {
+      .then(({name, about, avatar, _id}) => {
          userProfile.setUserInfo({
             name: name,
             about: about,
             avatar: avatar,
+            id: _id
          });
          popupEditForm.close();
       })
@@ -176,16 +191,11 @@ avatarEditBtn.addEventListener('click', () => {
    avatarValidator.resetValidation();
 })
 
-const popupImgPreview = new PopupWithImage('.popup_type_card-preview');
 popupAddForm.setEventListeners();
 popupEditForm.setEventListeners();
 popupImgPreview.setEventListeners();
 popupAvatarEdit.setEventListeners();
 popupWithSubmit.setEventListeners();
-
-const profileValidator = new FormValidator(validationObject, profileEditForm); 
-const createCardValidator = new FormValidator(validationObject, cardAddForm);
-const avatarValidator = new FormValidator(validationObject, avatarEditForm); 
 
 profileValidator.enableValidation();  
 createCardValidator.enableValidation();
