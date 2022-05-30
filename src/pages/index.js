@@ -84,14 +84,14 @@ function createCard(card) {
 
 const cardSection = new Section({
    renderer: (data) => {
-      const rendererFn2 = () => {
+      const renderer2 = () => {
          const card = createCard(data);
          cardSection.addItem(card);
       };
       let timer = setInterval(() => {
          if (userProfile._id !== undefined) {
             clearInterval(timer);
-            rendererFn2();
+            renderer2();
          }
       }, 0);
    },
