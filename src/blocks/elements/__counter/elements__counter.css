@@ -1,9 +1,6 @@
-.card__like-counter {
-   font-weight: 400;
-   font-size: 13px;
+.elements__counter {
+   display: flex;
+   flex-direction: column;
    text-align: center;
-   position: absolute;
-   bottom: 22px;
-   right: 27px;
-   color: #000000;
+   margin: 0;
 }

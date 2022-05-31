@@ -8,6 +8,7 @@
    cursor: pointer;
    background-color: transparent;
    align-self: center;
+   padding: 0;
 }
 .elements__like:hover{
    opacity: 0.5;
